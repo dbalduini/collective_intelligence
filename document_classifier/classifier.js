@@ -62,10 +62,9 @@ class Classifier {
 
   // The more a word appears, the more it gets pulled further 
   // from their assumed probabilty.
-  getWeightedProb(word, cat) {
+  getWeightedProb(word, cat, p) {
     const ap = 0.5 // The assumed probabilty
     const w = 1.0 // The weight
-    let p = this.getWordProbGivenCategory(word, cat)
     let total = this.getTotalWordCount(word)
     return ((w * ap) + (total * p)) / (w + total)
   }

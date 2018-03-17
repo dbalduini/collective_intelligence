@@ -18,8 +18,10 @@ class NaiveBayesClassifier extends Classifier {
   getDocumentProb(doc, cat) {
     let features = this.getFeatures(doc)
     // P(A ∩ B) = P(A) * P(B)
-    const f = (acc, w) => acc * this.getWeightedProb(w, cat)
-    return features.reduce(f, 1)
+    return features.reduce((acc, w) => {
+      let p = this.getWordProbGivenCategory(w, cat)
+      return acc * this.getWeightedProb(w, cat, p)
+    }, 1)
   }
 
   // Returns the probability of a document belonging to an category.
